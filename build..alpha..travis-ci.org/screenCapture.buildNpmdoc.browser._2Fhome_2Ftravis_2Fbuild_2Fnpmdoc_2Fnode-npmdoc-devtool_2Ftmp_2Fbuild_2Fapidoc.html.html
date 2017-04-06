@@ -1,0 +1,262 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/Jam3/devtool">devtool (v2.3.1)</a>
+</h1>
+<h4>runs Node.js programs through Chromium DevTools</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.devtool">module devtool</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.devtool.parse_args">
+            function <span class="apidocSignatureSpan">devtool.</span>parse_args
+            <span class="apidocSignatureSpan">(args)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.devtool.parse_args">module devtool.parse_args</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.devtool.parse_args.parse_args">
+            function <span class="apidocSignatureSpan">devtool.</span>parse_args
+            <span class="apidocSignatureSpan">(args)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.devtool.parse_args.fromArray">
+            function <span class="apidocSignatureSpan">devtool.parse_args.</span>fromArray
+            <span class="apidocSignatureSpan">(args)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.devtool" id="apidoc.module.devtool">module devtool</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.devtool.parse_args" id="apidoc.element.devtool.parse_args">
+        function <span class="apidocSignatureSpan">devtool.</span>parse_args
+        <span class="apidocSignatureSpan">(args)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function parseArgs(args) {
+  var argv = fromArray(args);
+
+  // use config search by default
+  if (typeof argv.config === 'undefined') argv.config = true;
+  if (argv.config !== false) {
+    // search rc paths
+    argv.config = rc('devtool', {
+      browserWindow: {
+        detachDevTools: true
+      }
+    });
+  } else {
+    // explicitly disable config searching
+    argv.config = { _: [] };
+  }
+
+  // Clean up the config object a bit
+  delete argv.config.config;
+  delete argv.config.C;
+
+  // We use globals to communicate some information from
+  // renderer / server without async ipc.
+  global.__electronDevtoolGlobals = {
+    console: argv.console,
+    sourceMaps: argv.sourceMaps,
+    browserField: argv.browserField,
+    debugBreak: argv.debugBreak,
+    browserGlobals: argv.browserGlobals,
+    nodeTimers: argv.nodeTimers,
+    requirePaths: [].concat(argv.require).filter(Boolean),
+    entry: null, // resolved in server.js
+    quit: true, // true until app launches
+    _processTTY: {
+      stdin: process.stdin.isTTY,
+      stdout: process.stdout.isTTY,
+      stderr: process.stderr.isTTY
+    }
+  };
+  argv.globals = global.__electronDevtoolGlobals;
+  return argv;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.devtool.parse_args" id="apidoc.module.devtool.parse_args">module devtool.parse_args</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.devtool.parse_args.parse_args" id="apidoc.element.devtool.parse_args.parse_args">
+        function <span class="apidocSignatureSpan">devtool.</span>parse_args
+        <span class="apidocSignatureSpan">(args)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function parseArgs(args) {
+  var argv = fromArray(args);
+
+  // use config search by default
+  if (typeof argv.config === 'undefined') argv.config = true;
+  if (argv.config !== false) {
+    // search rc paths
+    argv.config = rc('devtool', {
+      browserWindow: {
+        detachDevTools: true
+      }
+    });
+  } else {
+    // explicitly disable config searching
+    argv.config = { _: [] };
+  }
+
+  // Clean up the config object a bit
+  delete argv.config.config;
+  delete argv.config.C;
+
+  // We use globals to communicate some information from
+  // renderer / server without async ipc.
+  global.__electronDevtoolGlobals = {
+    console: argv.console,
+    sourceMaps: argv.sourceMaps,
+    browserField: argv.browserField,
+    debugBreak: argv.debugBreak,
+    browserGlobals: argv.browserGlobals,
+    nodeTimers: argv.nodeTimers,
+    requirePaths: [].concat(argv.require).filter(Boolean),
+    entry: null, // resolved in server.js
+    quit: true, // true until app launches
+    _processTTY: {
+      stdin: process.stdin.isTTY,
+      stdout: process.stdout.isTTY,
+      stderr: process.stderr.isTTY
+    }
+  };
+  argv.globals = global.__electronDevtoolGlobals;
+  return argv;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.devtool.parse_args.fromArray" id="apidoc.element.devtool.parse_args.fromArray">
+        function <span class="apidocSignatureSpan">devtool.parse_args.</span>fromArray
+        <span class="apidocSignatureSpan">(args)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function fromArray(args) {
+  return minimist(args, {
+    '--': true,
+    boolean: [
+      'console', 'quit', 'poll', 'show', 'headless',
+      'browserField', 'version', 'break', 'browserGlobals',
+      'nodeTimers', 'verbose', 'sourceMaps'
+    ],
+    string: [ 'index', 'require' ],
+    default: {
+      browserGlobals: true,
+      sourceMaps: true,
+      nodeTimers: true
+    },
+    alias: {
+      config: 'C',
+      debugBreak: 'break',
+      sourceMaps: [ 'source-maps', 'sm' ],
+      timeout: 't',
+      headless: 'h',
+      nodeTimers: [ 'node-timers', 'nt' ],
+      browserGlobals: [ 'bg', 'browser-globals' ],
+      browserField: [ 'bf', 'browser-field' ],
+      watch: 'w',
+      quit: 'q',
+      require: 'r',
+      version: 'v',
+      console: 'c',
+      index: 'i',
+      poll: 'p',
+      show: 's'
+    }
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
