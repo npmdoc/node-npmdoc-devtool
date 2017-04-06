@@ -1,0 +1,282 @@
+# api documentation for  [devtool (v2.3.1)](https://github.com/Jam3/devtool)  [![npm package](https://img.shields.io/npm/v/npmdoc-devtool.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-devtool) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-devtool.svg)](https://travis-ci.org/npmdoc/node-npmdoc-devtool)
+#### runs Node.js programs through Chromium DevTools
+
+[![NPM](https://nodei.co/npm/devtool.png?downloads=true)](https://www.npmjs.com/package/devtool)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-devtool/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-devtool_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-devtool/build/apidoc.html)
+
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-devtool/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-devtool/build/screenCapture.npmPackageDependencyTree.svg)
+
+
+
+# package.json
+
+```json
+
+{
+    "author": {
+        "name": "Matt DesLauriers",
+        "email": "dave.des@gmail.com",
+        "url": "https://github.com/mattdesl"
+    },
+    "bin": {
+        "devtool": "./bin/index.js"
+    },
+    "bugs": {
+        "url": "https://github.com/Jam3/devtool/issues"
+    },
+    "dependencies": {
+        "browser-resolve": "^1.11.0",
+        "chokidar": "^1.4.2",
+        "combine-source-map": "^0.7.1",
+        "concat-stream": "^1.5.1",
+        "convert-source-map": "^1.2.0",
+        "deep-extend": "^0.4.1",
+        "electron": "1.4.15",
+        "events": "^1.1.0",
+        "mime": "^1.3.4",
+        "minimist": "^1.2.0",
+        "mock-stdin": "^0.3.0",
+        "object-assign": "^4.0.1",
+        "rc": "^1.1.6",
+        "resolve": "^1.1.7",
+        "serializerr": "^1.0.2",
+        "sliced": "^1.0.1",
+        "strip-bom": "^2.0.0",
+        "syntax-error": "^1.1.4",
+        "through2": "^2.0.0"
+    },
+    "description": "runs Node.js programs through Chromium DevTools",
+    "devDependencies": {
+        "awesome-streetview": "^1.4.2",
+        "babel-plugin-transform-es2015-template-literals": "^6.3.13",
+        "babel-register": "^6.11.6",
+        "bluebird": "^3.1.5",
+        "browserify": "^13.0.0",
+        "concat-stream": "^1.5.1",
+        "cross-spawn-async": "^2.1.6",
+        "electron-canvas-to-buffer": "^1.0.3",
+        "faucet": "0.0.1",
+        "get-stdin": "^5.0.1",
+        "github-markdown-css": "^2.2.0",
+        "google-panorama-by-location": "^4.1.1",
+        "google-panorama-equirectangular": "^1.2.0",
+        "insert-css": "^0.2.0",
+        "marked": "^0.3.5",
+        "semistandard": "^7.0.5",
+        "tape": "^4.4.0"
+    },
+    "directories": {},
+    "dist": {
+        "shasum": "eb259ff04c81a218d9163334fe29b024a24e8855",
+        "tarball": "https://registry.npmjs.org/devtool/-/devtool-2.3.1.tgz"
+    },
+    "gitHead": "4f46fd4accc97b8e1490ab5302c1a4a1d18bd54a",
+    "homepage": "https://github.com/Jam3/devtool",
+    "keywords": [],
+    "license": "MIT",
+    "main": "index.js",
+    "maintainers": [
+        {
+            "name": "mattdesl",
+            "email": "dave.des@gmail.com"
+        }
+    ],
+    "name": "devtool",
+    "optionalDependencies": {},
+    "readme": "ERROR: No README data found!",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/Jam3/devtool.git"
+    },
+    "scripts": {
+        "example:browserify": "./bin/index.js example/browserify.js",
+        "example:es2015": "./bin/index.js example/es2015.js -w -i example/es2015.html",
+        "example:geolocate": "./bin/index.js example/geolocate.js -qch",
+        "example:http": "./bin/index.js example/http -w --break",
+        "example:markdown": "./bin/index.js example/markdown.js -qch < README.md > example/markdown.png",
+        "example:streetview": "./bin/index.js example/streetview.js -h -i example/streetview.html -q --bf > example/streetview.png",
+        "example:tape-browser": "browserify example/tape-browser.js | ./bin/index.js -c -t 1000 | faucet",
+        "lint": "semistandard",
+        "start": "node server.js",
+        "test": "npm run lint && node test/index.js | faucet"
+    },
+    "semistandard": {
+        "ignore": [
+            "test/fixtures/*.js"
+        ]
+    },
+    "version": "2.3.1"
+}
+```
+
+
+
+# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
+
+#### [module devtool](#apidoc.module.devtool)
+1.  [function <span class="apidocSignatureSpan">devtool.</span>parse_args (args)](#apidoc.element.devtool.parse_args)
+
+#### [module devtool.parse_args](#apidoc.module.devtool.parse_args)
+1.  [function <span class="apidocSignatureSpan">devtool.</span>parse_args (args)](#apidoc.element.devtool.parse_args.parse_args)
+1.  [function <span class="apidocSignatureSpan">devtool.parse_args.</span>fromArray (args)](#apidoc.element.devtool.parse_args.fromArray)
+
+
+
+# <a name="apidoc.module.devtool"></a>[module devtool](#apidoc.module.devtool)
+
+#### <a name="apidoc.element.devtool.parse_args"></a>[function <span class="apidocSignatureSpan">devtool.</span>parse_args (args)](#apidoc.element.devtool.parse_args)
+- description and source-code
+```javascript
+function parseArgs(args) {
+  var argv = fromArray(args);
+
+  // use config search by default
+  if (typeof argv.config === 'undefined') argv.config = true;
+  if (argv.config !== false) {
+    // search rc paths
+    argv.config = rc('devtool', {
+      browserWindow: {
+        detachDevTools: true
+      }
+    });
+  } else {
+    // explicitly disable config searching
+    argv.config = { _: [] };
+  }
+
+  // Clean up the config object a bit
+  delete argv.config.config;
+  delete argv.config.C;
+
+  // We use globals to communicate some information from
+  // renderer / server without async ipc.
+  global.__electronDevtoolGlobals = {
+    console: argv.console,
+    sourceMaps: argv.sourceMaps,
+    browserField: argv.browserField,
+    debugBreak: argv.debugBreak,
+    browserGlobals: argv.browserGlobals,
+    nodeTimers: argv.nodeTimers,
+    requirePaths: [].concat(argv.require).filter(Boolean),
+    entry: null, // resolved in server.js
+    quit: true, // true until app launches
+    _processTTY: {
+      stdin: process.stdin.isTTY,
+      stdout: process.stdout.isTTY,
+      stderr: process.stderr.isTTY
+    }
+  };
+  argv.globals = global.__electronDevtoolGlobals;
+  return argv;
+}
+```
+- example usage
+```shell
+n/a
+```
+
+
+
+# <a name="apidoc.module.devtool.parse_args"></a>[module devtool.parse_args](#apidoc.module.devtool.parse_args)
+
+#### <a name="apidoc.element.devtool.parse_args.parse_args"></a>[function <span class="apidocSignatureSpan">devtool.</span>parse_args (args)](#apidoc.element.devtool.parse_args.parse_args)
+- description and source-code
+```javascript
+function parseArgs(args) {
+  var argv = fromArray(args);
+
+  // use config search by default
+  if (typeof argv.config === 'undefined') argv.config = true;
+  if (argv.config !== false) {
+    // search rc paths
+    argv.config = rc('devtool', {
+      browserWindow: {
+        detachDevTools: true
+      }
+    });
+  } else {
+    // explicitly disable config searching
+    argv.config = { _: [] };
+  }
+
+  // Clean up the config object a bit
+  delete argv.config.config;
+  delete argv.config.C;
+
+  // We use globals to communicate some information from
+  // renderer / server without async ipc.
+  global.__electronDevtoolGlobals = {
+    console: argv.console,
+    sourceMaps: argv.sourceMaps,
+    browserField: argv.browserField,
+    debugBreak: argv.debugBreak,
+    browserGlobals: argv.browserGlobals,
+    nodeTimers: argv.nodeTimers,
+    requirePaths: [].concat(argv.require).filter(Boolean),
+    entry: null, // resolved in server.js
+    quit: true, // true until app launches
+    _processTTY: {
+      stdin: process.stdin.isTTY,
+      stdout: process.stdout.isTTY,
+      stderr: process.stderr.isTTY
+    }
+  };
+  argv.globals = global.__electronDevtoolGlobals;
+  return argv;
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.devtool.parse_args.fromArray"></a>[function <span class="apidocSignatureSpan">devtool.parse_args.</span>fromArray (args)](#apidoc.element.devtool.parse_args.fromArray)
+- description and source-code
+```javascript
+function fromArray(args) {
+  return minimist(args, {
+    '--': true,
+    boolean: [
+      'console', 'quit', 'poll', 'show', 'headless',
+      'browserField', 'version', 'break', 'browserGlobals',
+      'nodeTimers', 'verbose', 'sourceMaps'
+    ],
+    string: [ 'index', 'require' ],
+    default: {
+      browserGlobals: true,
+      sourceMaps: true,
+      nodeTimers: true
+    },
+    alias: {
+      config: 'C',
+      debugBreak: 'break',
+      sourceMaps: [ 'source-maps', 'sm' ],
+      timeout: 't',
+      headless: 'h',
+      nodeTimers: [ 'node-timers', 'nt' ],
+      browserGlobals: [ 'bg', 'browser-globals' ],
+      browserField: [ 'bf', 'browser-field' ],
+      watch: 'w',
+      quit: 'q',
+      require: 'r',
+      version: 'v',
+      console: 'c',
+      index: 'i',
+      poll: 'p',
+      show: 's'
+    }
+  });
+}
+```
+- example usage
+```shell
+n/a
+```
+
+
+
+# misc
+- this document was created with [utility2](https://github.com/kaizhu256/node-utility2)
