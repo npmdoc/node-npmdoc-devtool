@@ -1,9 +1,14 @@
-# api documentation for  [devtool (v2.3.1)](https://github.com/Jam3/devtool)  [![npm package](https://img.shields.io/npm/v/npmdoc-devtool.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-devtool) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-devtool.svg)](https://travis-ci.org/npmdoc/node-npmdoc-devtool)
+# npmdoc-devtool
+
+#### api documentation for  [devtool (v2.3.1)](https://github.com/Jam3/devtool)  [![npm package](https://img.shields.io/npm/v/npmdoc-devtool.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-devtool) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-devtool.svg)](https://travis-ci.org/npmdoc/node-npmdoc-devtool)
+
 #### runs Node.js programs through Chromium DevTools
 
-[![NPM](https://nodei.co/npm/devtool.png?downloads=true)](https://www.npmjs.com/package/devtool)
+[![NPM](https://nodei.co/npm/devtool.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/devtool)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-devtool/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-devtool_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-devtool/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-devtool/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-devtool/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-devtool/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-devtool/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-devtool/build/screenCapture.npmPackageListing.svg)
 
@@ -18,7 +23,6 @@
 {
     "author": {
         "name": "Matt DesLauriers",
-        "email": "dave.des@gmail.com",
         "url": "https://github.com/mattdesl"
     },
     "bin": {
@@ -80,13 +84,11 @@
     "main": "index.js",
     "maintainers": [
         {
-            "name": "mattdesl",
-            "email": "dave.des@gmail.com"
+            "name": "mattdesl"
         }
     ],
     "name": "devtool",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/Jam3/devtool.git"
@@ -110,170 +112,6 @@
     },
     "version": "2.3.1"
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module devtool](#apidoc.module.devtool)
-1.  [function <span class="apidocSignatureSpan">devtool.</span>parse_args (args)](#apidoc.element.devtool.parse_args)
-
-#### [module devtool.parse_args](#apidoc.module.devtool.parse_args)
-1.  [function <span class="apidocSignatureSpan">devtool.</span>parse_args (args)](#apidoc.element.devtool.parse_args.parse_args)
-1.  [function <span class="apidocSignatureSpan">devtool.parse_args.</span>fromArray (args)](#apidoc.element.devtool.parse_args.fromArray)
-
-
-
-# <a name="apidoc.module.devtool"></a>[module devtool](#apidoc.module.devtool)
-
-#### <a name="apidoc.element.devtool.parse_args"></a>[function <span class="apidocSignatureSpan">devtool.</span>parse_args (args)](#apidoc.element.devtool.parse_args)
-- description and source-code
-```javascript
-function parseArgs(args) {
-  var argv = fromArray(args);
-
-  // use config search by default
-  if (typeof argv.config === 'undefined') argv.config = true;
-  if (argv.config !== false) {
-    // search rc paths
-    argv.config = rc('devtool', {
-      browserWindow: {
-        detachDevTools: true
-      }
-    });
-  } else {
-    // explicitly disable config searching
-    argv.config = { _: [] };
-  }
-
-  // Clean up the config object a bit
-  delete argv.config.config;
-  delete argv.config.C;
-
-  // We use globals to communicate some information from
-  // renderer / server without async ipc.
-  global.__electronDevtoolGlobals = {
-    console: argv.console,
-    sourceMaps: argv.sourceMaps,
-    browserField: argv.browserField,
-    debugBreak: argv.debugBreak,
-    browserGlobals: argv.browserGlobals,
-    nodeTimers: argv.nodeTimers,
-    requirePaths: [].concat(argv.require).filter(Boolean),
-    entry: null, // resolved in server.js
-    quit: true, // true until app launches
-    _processTTY: {
-      stdin: process.stdin.isTTY,
-      stdout: process.stdout.isTTY,
-      stderr: process.stderr.isTTY
-    }
-  };
-  argv.globals = global.__electronDevtoolGlobals;
-  return argv;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-
-
-# <a name="apidoc.module.devtool.parse_args"></a>[module devtool.parse_args](#apidoc.module.devtool.parse_args)
-
-#### <a name="apidoc.element.devtool.parse_args.parse_args"></a>[function <span class="apidocSignatureSpan">devtool.</span>parse_args (args)](#apidoc.element.devtool.parse_args.parse_args)
-- description and source-code
-```javascript
-function parseArgs(args) {
-  var argv = fromArray(args);
-
-  // use config search by default
-  if (typeof argv.config === 'undefined') argv.config = true;
-  if (argv.config !== false) {
-    // search rc paths
-    argv.config = rc('devtool', {
-      browserWindow: {
-        detachDevTools: true
-      }
-    });
-  } else {
-    // explicitly disable config searching
-    argv.config = { _: [] };
-  }
-
-  // Clean up the config object a bit
-  delete argv.config.config;
-  delete argv.config.C;
-
-  // We use globals to communicate some information from
-  // renderer / server without async ipc.
-  global.__electronDevtoolGlobals = {
-    console: argv.console,
-    sourceMaps: argv.sourceMaps,
-    browserField: argv.browserField,
-    debugBreak: argv.debugBreak,
-    browserGlobals: argv.browserGlobals,
-    nodeTimers: argv.nodeTimers,
-    requirePaths: [].concat(argv.require).filter(Boolean),
-    entry: null, // resolved in server.js
-    quit: true, // true until app launches
-    _processTTY: {
-      stdin: process.stdin.isTTY,
-      stdout: process.stdout.isTTY,
-      stderr: process.stderr.isTTY
-    }
-  };
-  argv.globals = global.__electronDevtoolGlobals;
-  return argv;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.devtool.parse_args.fromArray"></a>[function <span class="apidocSignatureSpan">devtool.parse_args.</span>fromArray (args)](#apidoc.element.devtool.parse_args.fromArray)
-- description and source-code
-```javascript
-function fromArray(args) {
-  return minimist(args, {
-    '--': true,
-    boolean: [
-      'console', 'quit', 'poll', 'show', 'headless',
-      'browserField', 'version', 'break', 'browserGlobals',
-      'nodeTimers', 'verbose', 'sourceMaps'
-    ],
-    string: [ 'index', 'require' ],
-    default: {
-      browserGlobals: true,
-      sourceMaps: true,
-      nodeTimers: true
-    },
-    alias: {
-      config: 'C',
-      debugBreak: 'break',
-      sourceMaps: [ 'source-maps', 'sm' ],
-      timeout: 't',
-      headless: 'h',
-      nodeTimers: [ 'node-timers', 'nt' ],
-      browserGlobals: [ 'bg', 'browser-globals' ],
-      browserField: [ 'bf', 'browser-field' ],
-      watch: 'w',
-      quit: 'q',
-      require: 'r',
-      version: 'v',
-      console: 'c',
-      index: 'i',
-      poll: 'p',
-      show: 's'
-    }
-  });
-}
-```
-- example usage
-```shell
-n/a
 ```
 
 
